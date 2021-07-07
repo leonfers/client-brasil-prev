@@ -116,4 +116,33 @@ class ClientControllerTest {
                 .andExpect(jsonPath("$.data.name").value(client.getName()));
     }
 
+    @Test
+    void it_should_return_one_new_client_dto() throws Exception {
+        ClientForm client = new ClientForm();
+        client.setName("Cliente de Teste");
+        client.setCpf("00901903000");
+        client.setNumber("000");
+        client.setStreet("Rua de Teste");
+        client.setCity("Cidade Teste");
+        client.setUf("PI");
+        client.setZipCode("6400000");
+
+        ClientDTO clientDTO = new ClientDTO();
+        clientDTO.setId(1L);
+        clientDTO.setName("Cliente de Teste");
+        clientDTO.setCpf("00901903000");
+        clientDTO.setNumber("000");
+        clientDTO.setStreet("Rua de Teste");
+        clientDTO.setCity("Cidade Teste");
+        clientDTO.setUf("PI");
+        clientDTO.setZipCode("6400000");
+
+        when(clientService.save(any(ClientDTO.class))).thenReturn(clientDTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/clients")
+                .content(mapper.writeValueAsString(client))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id").value(1L));
+    }
+
 }
