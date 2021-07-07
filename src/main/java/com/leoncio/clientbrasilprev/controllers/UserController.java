@@ -34,7 +34,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> save(@RequestBody @Valid User user) {
-        user = createUserAndAccount(user);
+        user = createUser(user);
         user.setRoles(null);
         user.setPassword(null);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @Transactional
-    public User createUserAndAccount(User user){
+    public User createUser(User user){
         user.setRoles(roleRepository.findAll());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCreatedAt(LocalDateTime.now());
