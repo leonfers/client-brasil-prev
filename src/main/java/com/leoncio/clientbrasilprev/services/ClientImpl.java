@@ -38,6 +38,14 @@ public class ClientImpl implements ClientService {
             client = new Client(clientDTO);
         } else {
             client = clientRepository.findClientById(clientDTO.getId());
+            client.setName(clientDTO.getName());
+            client.setCpf(clientDTO.getCpf());
+            client.setNumber(clientDTO.getNumber());
+            client.setStreet(clientDTO.getStreet());
+            client.setCity(clientDTO.getCity());
+            client.setZipCode(clientDTO.getZipCode());
+            client.setUf(clientDTO.getUf());
+            client.setNeighborhood(clientDTO.getNeighborhood());
         }
         return new ClientDTO(clientRepository.save(client));
     }

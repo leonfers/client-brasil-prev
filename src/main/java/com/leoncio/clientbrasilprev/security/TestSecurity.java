@@ -12,7 +12,7 @@ public class TestSecurity extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity web) throws Exception {
-        web
+        web.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**").permitAll();
     }
