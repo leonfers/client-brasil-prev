@@ -1,8 +1,10 @@
 package com.leoncio.clientbrasilprev.controllers;
 
 import com.leoncio.clientbrasilprev.config.Const;
-import com.leoncio.clientbrasilprev.dtos.ResponseDTO;
+import com.leoncio.clientbrasilprev.dtos.ClientDTO;
+import com.leoncio.clientbrasilprev.dtos.Response;
 import com.leoncio.clientbrasilprev.forms.ClientForm;
+import com.leoncio.clientbrasilprev.models.Client;
 import com.leoncio.clientbrasilprev.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -12,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("clients")
-@Secured(Const.ROLE_ADMIN)
+//@Secured(Const.ROLE_ADMIN)
 public class ClientController {
 
     private final ClientService clientService;
@@ -22,29 +24,31 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-
     @GetMapping(produces = "application/json")
-    public ResponseDTO list() {
-        return null;
+    public Response list() {
+        return new Response(clientService.findAll());
     }
 
     @GetMapping(path = "/{id}", produces = "application/json")
-    public ResponseDTO show(@PathVariable String id) {
-        return null;
+    public Response show(@PathVariable Long id) {
+        return new Response(clientService.findClientById(id));
     }
 
     @PutMapping(path = "/{id}", produces = "application/json")
-    public ResponseDTO edit(@PathVariable String id, @Valid @RequestBody ClientForm clientForm) {
-        return null;
+    public Response edit(@PathVariable Long id, @Valid @RequestBody ClientForm clientForm) {
+        ClientDTO clientDTO = new ClientDTO(clientForm);
+        clientDTO.setId(id);
+        return new Response(clientService.save(clientDTO));
     }
 
     @PostMapping(produces = "application/json")
-    public ResponseDTO create(@RequestBody @Valid ClientForm clientForm) {
-        return null;
+    public Response create(@RequestBody @Valid ClientForm clientForm) {
+        return new Response(clientService.save(new ClientDTO(clientForm)));
     }
 
     @DeleteMapping(path = "/{id}", produces = "application/json")
-    public ResponseDTO destroy(@PathVariable String id) {
-        return null;
+    public Response destroy(@PathVariable Long id) {
+        clientService.destroy(id);
+        return new Response("Client was removed successfully");
     }
 }

@@ -1,7 +1,7 @@
 package com.leoncio.clientbrasilprev.controllers;
 
 import com.leoncio.clientbrasilprev.config.Const;
-import com.leoncio.clientbrasilprev.dtos.ResponseDTO;
+import com.leoncio.clientbrasilprev.dtos.Response;
 import com.leoncio.clientbrasilprev.forms.ClientForm;
 import com.leoncio.clientbrasilprev.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,30 +25,30 @@ public class UserController {
 
     @Secured(Const.ROLE_ADMIN)
     @GetMapping(produces = "application/json")
-    public ResponseDTO list() {
+    public Response list() {
         return null;
     }
 
     @Secured(Const.ROLE_ADMIN)
     @GetMapping(path = "/{id}", produces = "application/json")
-    public ResponseDTO show(@PathVariable String id) {
+    public Response show(@PathVariable String id) {
         return null;
     }
 
     @Secured(Const.ROLE_ADMIN)
     @PutMapping(path = "/{id}", produces = "application/json")
-    public ResponseDTO edit(@PathVariable String id, @Valid @RequestBody ClientForm clientForm) {
+    public Response edit(@PathVariable String id, @Valid @RequestBody ClientForm clientForm) {
         return null;
     }
 
     @PostMapping(produces = "application/json")
-    public ResponseDTO create(@RequestBody @Valid ClientForm clientForm) {
+    public Response create(@RequestBody @Valid ClientForm clientForm) {
         return null;
     }
 
     @Secured(Const.ROLE_ADMIN)
     @DeleteMapping(path = "/{id}", produces = "application/json")
-    public ResponseDTO destroy(@PathVariable String id) {
+    public Response destroy(@PathVariable String id) {
         return null;
     }
 }
