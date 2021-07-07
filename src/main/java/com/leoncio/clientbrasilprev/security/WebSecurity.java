@@ -17,7 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import static com.leoncio.clientbrasilprev.security.SecurityConstants.SIGN_UP_URL;
 
-@Profile("dev")
+@Profile("!test")
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
