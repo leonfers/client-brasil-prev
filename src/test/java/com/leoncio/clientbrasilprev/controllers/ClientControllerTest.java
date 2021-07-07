@@ -3,9 +3,7 @@ package com.leoncio.clientbrasilprev.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leoncio.clientbrasilprev.dtos.ClientDTO;
 import com.leoncio.clientbrasilprev.forms.ClientForm;
-import com.leoncio.clientbrasilprev.models.Client;
 import com.leoncio.clientbrasilprev.services.ClientService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +16,20 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
 @SpringBootTest
-@ActiveProfiles({ "test"})
+@ActiveProfiles({"test"})
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 class ClientControllerTest {
 
@@ -143,6 +140,14 @@ class ClientControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.id").value(1L));
+    }
+
+    @Test
+    void it_should_return_delete_client_return_ok() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/clients/2")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").value("Client was removed successfully"));
     }
 
 }
