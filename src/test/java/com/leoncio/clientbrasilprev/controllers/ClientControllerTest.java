@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import java.util.ArrayList;
@@ -60,6 +61,26 @@ class ClientControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data[0].id").value(client.getId()));
+    }
+
+
+    @Test
+    void it_should_return_one_client_dto() throws Exception {
+        ClientDTO client = new ClientDTO();
+        client.setId(1L);
+        client.setName("Cliente de Teste");
+        client.setCpf("00901903000");
+        client.setNumber("000");
+        client.setStreet("Rua de Teste");
+        client.setCity("Cidade Teste");
+        client.setUf("PI");
+        client.setZipCode("6400000");
+
+        when(clientService.findClientById(anyLong())).thenReturn(client);
+        mockMvc.perform(MockMvcRequestBuilders.get("/clients/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id").value(client.getId()));
     }
 
 }
