@@ -38,7 +38,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
             }
             List<Client> clients = clientRepository.findAll();
             if (clients.isEmpty()) {
-                createClient("Cliente de Teste", "00901903000", "000", "Rua de Teste","Cidade Teste","PI","6400000");
+                createClient("Cliente de Teste", "00901903000", "000", "Rua de Teste","Bairro de Teste", "Cidade Teste","PI","6400000");
 
             }
         }
@@ -55,7 +55,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
      * @param uf
      * @param zip
      */
-    private void createClient(String name, String cpf, String number, String street, String city, String uf, String zip) {
+    private void createClient(String name, String cpf, String number, String street, String neighborhood, String city, String uf, String zip) {
         Client client = new Client();
         client.setName(name);
         client.setCpf(cpf);
@@ -64,6 +64,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         client.setCity(city);
         client.setUf(uf);
         client.setZipCode(zip);
+        client.setNeighborhood(neighborhood);
         clientRepository.save(client);
     }
 
