@@ -1,40 +1,33 @@
 package com.leoncio.clientbrasilprev.models;
 
-import com.leoncio.clientbrasilprev.dtos.UserDTO;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
-@Entity(name = "user")
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     @NotBlank(message = "Name is mandatory")
     private String name;
-
     @NotBlank(message = "Email is mandatory")
     @Email(message = "Email with wrong format")
     @Column(unique = true)
-    private String username;
+    private String email;
 
     @NotBlank(message = "Password is mandatory")
     private String password;
-
     private LocalDateTime createdAt;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -44,28 +37,28 @@ public class User {
     )
     private List<Role> roles;
 
-    public User(User user) {
-        this.id = user.id;
-        this.name = user.getName();
-        this.username = user.getUsername();
-        this.createdAt = user.getCreatedAt();
-        this.roles = user.getRoles();
-        this.password = user.getPassword();
+    public User() {
     }
 
-    public User(UserDTO userDto) {
-        this.id = userDto.getId();
-        this.name = userDto.getName();
-        this.username = userDto.getEmail();
-        this.createdAt = LocalDateTime.now();
-        this.password = userDto.getPassword();
-        this.roles = Collections.singletonList(new Role());
+    public User(String name, String email) {
+        super();
+        this.name = name;
+        this.email = email;
+    }
+
+    public User(User user) {
+        super();
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
+        this.id = user.getId();
     }
 
     public User(String name, String email, String password, List<Role> roles) {
+        super();
         this.name = name;
-        this.username = email;
-        this.createdAt = LocalDateTime.now();
+        this.email = email;
         this.roles = roles;
         this.password = password;
     }

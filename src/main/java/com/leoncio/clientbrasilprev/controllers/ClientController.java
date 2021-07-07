@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("clients")
-//@Secured(Const.ROLE_ADMIN)
+@Secured({Const.ROLE_ADMIN, Const.ROLE_CLIENT})
 public class ClientController {
 
     private final ClientService clientService;

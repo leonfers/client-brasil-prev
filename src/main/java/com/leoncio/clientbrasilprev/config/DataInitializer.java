@@ -13,11 +13,13 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @Component
-@Profile("!dev")
+@Profile("prod")
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
@@ -41,6 +43,9 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
                 createClient("Cliente de Teste", "00901903000", "000", "Rua de Teste","Bairro de Teste", "Cidade Teste","PI","6400000");
 
             }
+        } else {
+            roleRepository.save(new Role(Const.ROLE_ADMIN));
+            roleRepository.save(new Role(Const.ROLE_CLIENT));
         }
     }
 
@@ -80,6 +85,7 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         Role role = new Role(roleName);
         this.roleRepository.save(role);
         User user = new User(name, email, password, Collections.singletonList(role));
+        user.setCreatedAt(LocalDateTime.now());
         userRepository.save(user);
     }
 

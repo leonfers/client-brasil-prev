@@ -1,26 +1,20 @@
 package com.leoncio.clientbrasilprev.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Getter
 @Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
 
-    private Long id;
-
-    @NotBlank(message = "Name is mandatory")
-    private String name;
-
-    @NotBlank(message = "Email is mandatory")
-    @Email(message = "Email with wrong format")
-    @Column(unique = true)
+    private String username;
     private String email;
-
-    @NotBlank(message = "Password is mandatory")
     private String password;
+    private LocalDateTime createdAt;
 }
