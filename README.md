@@ -33,7 +33,7 @@ cpf and address).
 #### 3.3 Running the application with an IDE (Ex: [Intellij IDEA](https://www.jetbrains.com/help/idea/spring-boot.html))
 #### 3.4 Running the application through maven
 ```bash
-mvn spring-boot:run -Dspring.profiles.active="prod" -Dspring-boot.run.jvmArguments="-DDEBUG=true -DDB_HOST=172.17.0.2 -DDB_PORT=3306 -DDB_NAME=client -DDB_USER=root -DDB_PASSWORD=root"
+./mvnw spring-boot:run -Dspring.profiles.active="prod" -Dspring-boot.run.arguments="--DB_HOST=172.17.0.2 --DB_PORT=3306 --DB_NAME=bprev --DB_USER=root --DB_PASSWORD=root"
 ```
 
 #### 3.5 Auto generated documentation [/swagger.html](http://localhost:8000/swagger.html) da API
@@ -42,7 +42,7 @@ mvn spring-boot:run -Dspring.profiles.active="prod" -Dspring-boot.run.jvmArgumen
 
 #### 3.7 Running tests
 ```bash
-mvn test -DargLine="-DDEBUG=true -DDB_HOST=172.17.0.2 -DDB_PORT=3306 -DDB_NAME=bprev -DDB_USER=root -DDB_PASSWORD=root"
+mvn test
 ```
 
 
@@ -70,7 +70,19 @@ The API has the following modules
 #### 4.1.2 Security
 #### 4.1.3 Clients
 
-### 4. Deploy
+### 5. Dockerization
+```bash
+./mvnw package && java -jar target/clientbrasilprev-0.0.1.jar --DB_HOST=172.17.0.2 --DB_PORT=3306 --DB_NAME=bprev --DB_USER=root --DB_PASSWORD=root
+
+./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=leoncio/challenge-bprev
+
+docker build -t leoncio/challenge-bprev .
+
+docker run -p 8000:8000 -e 'DB_HOST=172.17.0.2' -e 'DB_PORT=3306' -e 'DB_NAME=bprev' -e 'DB_USER=root' -e 'DB_PASSWORD=root' -it leoncio/challenge-bprev
+```
+### 6. Deploy
+
+
 
 <!-- CONTACT -->
 ### Contact
