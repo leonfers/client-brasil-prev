@@ -80,7 +80,11 @@ docker build -t leoncio/challenge-bprev .
 
 docker run -p 8000:8000 -e 'DB_HOST=172.17.0.2' -e 'DB_PORT=3306' -e 'DB_NAME=bprev' -e 'DB_USER=root' -e 'DB_PASSWORD=root' -it leoncio/challenge-bprev
 ```
-### 6. Deploy
+
+### 6. Public Url
+
+http://ec2-18-231-129-73.sa-east-1.compute.amazonaws.com
+
 
 
 
