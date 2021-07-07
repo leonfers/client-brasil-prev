@@ -31,5 +31,14 @@ public class Client {
     private String uf;
 
     public Client(ClientDTO clientDTO) {
+        this.id = clientDTO.getId();
+        this.name = clientDTO.getName();
+        this.cpf = clientDTO.getCpf();
+        this.street = clientDTO.getStreet();
+        this.number = clientDTO.getNumber();
+        this.neighborhood = clientDTO.getNeighborhood();
+        this.city = clientDTO.getCity();
+        this.zipCode = clientDTO.getZipCode();
+        this.uf = clientDTO.getUf();
     }
 }
