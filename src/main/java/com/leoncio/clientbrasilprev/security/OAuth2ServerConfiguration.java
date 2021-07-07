@@ -82,11 +82,11 @@ public class OAuth2ServerConfiguration {
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
             clients
                     .inMemory()
-                    .withClient(System.getProperty("CLIENT_ID"))
+                    .withClient("client")
                     .authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("all")
                     .refreshTokenValiditySeconds(3600)
                     .resourceIds(RESOURCE_ID)
-                    .secret(passwordEncoder.encode(System.getProperty("CLIENT_SECRET")))
+                    .secret(passwordEncoder.encode("123456"))
                     .accessTokenValiditySeconds(300);
 
         }
