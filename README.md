@@ -36,9 +36,9 @@ cpf and address).
 ./mvnw spring-boot:run -Dspring.profiles.active="prod" -Dspring-boot.run.arguments="--DB_HOST=172.17.0.2 --DB_PORT=3306 --DB_NAME=bprev --DB_USER=root --DB_PASSWORD=root"
 ```
 
-#### 3.5 Auto generated documentation [/swagger.html](http://localhost:8000/swagger.html) da API
+#### 3.5 Auto generated documentation [/swagger.html](http://ec2-18-231-129-73.sa-east-1.compute.amazonaws.com/swagger.html) da API
 
-#### 3.6 Postman Collection can be found [here](https://documenter.getpostman.com/view/8357607/Tzm5GwFQ)
+#### 3.6 Postman Collection can be found [here](https://documenter.getpostman.com/view/8357607/Tzm5GwFQ) and downloaded [here](https://github.com/leonfers/client-brasil-prev/Clients%20BrasilPrev.postman_collection.json)
 
 #### 3.7 Running tests
 ```bash
