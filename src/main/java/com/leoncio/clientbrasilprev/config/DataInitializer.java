@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,19 +32,16 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
-        if (Boolean.parseBoolean(System.getProperty("DEBUG"))) {
-            List<User> users = userRepository.findAll();
-            if (users.isEmpty()) {
-                createUser("Admin", "admin@admin.com", passwordEncoder.encode("123456"), Const.ROLE_ADMIN);
-            }
-            List<Client> clients = clientRepository.findAll();
-            if (clients.isEmpty()) {
-                createClient("Cliente de Teste", "00901903000", "000", "Rua de Teste","Bairro de Teste", "Cidade Teste","PI","6400000");
-
-            }
-        } else {
-            roleRepository.save(new Role(Const.ROLE_ADMIN));
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            Role role = roleRepository.save(new Role(Const.ROLE_ADMIN));
             roleRepository.save(new Role(Const.ROLE_CLIENT));
+            createUser("Admin", "admin@admin.com", passwordEncoder.encode("123456"), role);
+        }
+        List<Client> clients = clientRepository.findAll();
+        if (clients.isEmpty()) {
+            createClient("Cliente de Teste", "00901903000", "000", "Rua de Teste", "Bairro de Teste", "Cidade Teste", "PI", "6400000");
+
         }
     }
 
@@ -81,10 +77,8 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
      * @param password
      * @param roleName
      */
-    public void createUser(String name, String email, String password, String roleName) {
-        Role role = new Role(roleName);
-        this.roleRepository.save(role);
-        User user = new User(name, email, password, Collections.singletonList(role));
+    public void createUser(String name, String email, String password, Role roleName) {
+        User user = new User(name, email, password, Collections.singletonList(roleName));
         user.setCreatedAt(LocalDateTime.now());
         userRepository.save(user);
     }
