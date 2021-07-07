@@ -38,7 +38,7 @@ cpf and address).
 
 #### 3.5 Auto generated documentation [/swagger.html](http://ec2-18-231-129-73.sa-east-1.compute.amazonaws.com/swagger.html) da API
 
-#### 3.6 Postman Collection can be found [here](https://documenter.getpostman.com/view/8357607/Tzm5GwFQ) and downloaded [here](https://github.com/leonfers/client-brasil-prev/Clients%20BrasilPrev.postman_collection.json)
+#### 3.6 Postman Collection can be found [here](https://documenter.getpostman.com/view/8357607/Tzm5GwFQ) and downloaded [here](https://github.com/leonfers/client-brasil-prev/blob/main/Clients%20BrasilPrev.postman_collection.json)
 
 #### 3.7 Running tests
 ```bash
