@@ -32,9 +32,11 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent arg0) {
+        System.out.println("production");
         List<User> users = userRepository.findAll();
         if (users.isEmpty()) {
             Role role = roleRepository.save(new Role(Const.ROLE_ADMIN));
+            roleRepository.save(new Role(Const.ROLE_CLIENT));
             roleRepository.save(new Role(Const.ROLE_CLIENT));
             createUser("Admin", "admin@admin.com", passwordEncoder.encode("123456"), role);
         }

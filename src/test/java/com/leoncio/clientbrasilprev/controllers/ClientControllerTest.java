@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 @ActiveProfiles({"test"})
-@TestPropertySource(locations = "classpath:application-integrationtest.properties")
+@TestPropertySource(locations = "classpath:application.properties")
 class ClientControllerTest {
 
     ObjectMapper mapper = new ObjectMapper();
