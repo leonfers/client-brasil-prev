@@ -61,4 +61,12 @@ public class User {
         this.password = userDto.getPassword();
         this.roles = Collections.singletonList(new Role());
     }
+
+    public User(String name, String email, String password, List<Role> roles) {
+        this.name = name;
+        this.username = email;
+        this.createdAt = LocalDateTime.now();
+        this.roles = roles;
+        this.password = password;
+    }
 }

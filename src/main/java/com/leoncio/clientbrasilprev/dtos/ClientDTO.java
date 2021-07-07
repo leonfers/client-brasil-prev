@@ -21,6 +21,14 @@ public class ClientDTO {
     private String uf;
 
     public ClientDTO(Client client) {
+        this.id = client.getId();
+        this.name = client.getName();
+        this.cpf = client.getCpf();
+        this.street = client.getStreet();
+        this.number = client.getNumber();
+        this.zipCode = client.getZipCode();
+        this.city = client.getCity();
+        this.uf = client.getUf();
     }
 
     public ClientDTO(ClientForm clientForm) {
